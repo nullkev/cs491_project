@@ -96,6 +96,12 @@ cp -r $HOME/aerial_robotics_ws/src/aerial_robotics/robowork_minihawk_gazebo/mode
 
 cd $HOME/aerial_robotics_ws
 catkin build
+
+# INSTRUCTIONS FOR GETTING THE SCRIPT
+1.) Open a new terminal and clone this repo (git clone https://github.com/nullkev/cs491_project)
+2.) cd $HOME/aerial_robotics_ws/src/
+3.) cp -r $HOME/cs491_project/project
+4.) catkin build
 ```
 
 ## Simulation
