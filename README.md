@@ -123,35 +123,6 @@ wp load ../src/aerial_robotics/robowork_minihawk_gazebo/resources/waypoints.txt
 [Launch ROS node (in new terminal 1)]:
 ROS_NAMESPACE="minihawk_SIM" roslaunch robowork_minihawk_launch vehicle1_apm_SIM.launch
 
-[Invoke ROS services (in new terminal 2)]:
-rosservice call /minihawk_SIM/mavros/set_mode "custom_mode: 'GUIDED'"
-rosservice call /minihawk_SIM/mavros/cmd/arming True
-rosservice call /minihawk_SIM/mavros/cmd/takeoff "{min_pitch: 0.0, yaw: 0.0, latitude: 0.0, longitude: 0.0, altitude: 10.0}"
-
-[Alternatively, invoke ROS services (in new terminal 2) to run auto (waypoint) mission]:
-rosservice call /minihawk_SIM/mavros/set_mode "custom_mode: 'AUTO'"
-rosservice call /minihawk_SIM/mavros/cmd/arming True   ###Required if the mission hasn't started yet### 
-
-### Once the vehicle reaches its final waypoint (over the building) the camera will be looking at an apriltag marker  ###
-
-[Observe ROS topic output of apriltag_ros node (in new terminal 3) (relative pose in camera frame coordinates with respect to detected apriltag marker)]:
-rostopic echo /minihawk_SIM/MH_usb_camera_link_optical/tag_detections
-
-### Try switching between some Quadplane modes and control the aircraft motion ###
-
-# https://ardupilot.org/plane/docs/qloiter-mode.html#qloiter-mode
-[Publish ROS topic (in new terminal 3) (this is required to virtually center the rc sticks, 4 first channels are 0:roll(-left,+right), 1:pitch(-up,+down), 2:throttle(-down,+up), 3:yaw(-left,+right))]:
-rostopic pub -r 10 /minihawk_SIM/mavros/rc/override  mavros_msgs/OverrideRCIn "channels: [1500, 1500, 1500, 1500, 1800, 1000, 1000, 1800, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]"
-[Invoke ROS service (in terminal 2)]:
-rosservice call /minihawk_SIM/mavros/set_mode "custom_mode: 'QLOITER'"
-
-# https://ardupilot.org/plane/docs/qhover-mode.html
-[Publish ROS topic (in new terminal 3) (this is required to virtually trim the rc sticks)]:
-rostopic pub -r 10 /minihawk_SIM/mavros/override  mavros_msgs/OverrideRCIn "channels: [1464, 1598, 1466, 1500, 1800, 1000, 1000, 1800, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]"
-[Invoke ROS service (in terminal 2)]:
-rosservice call /minihawk_SIM/mavros/set_mode "custom_mode: 'QHOVER'"
-
-# https://ardupilot.org/plane/docs/qland-mode.html
-[Invoke ROS service (in terminal 2)]:
-rosservice call /minihawk_SIM/mavros/set_mode "custom_mode: 'QLAND'"
+[Activate Script (in new terminal 2)]:
+rosrun project auto_landing_node.py
 ```
