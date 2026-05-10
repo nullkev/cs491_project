@@ -100,7 +100,8 @@ catkin build
 # INSTRUCTIONS FOR GETTING THE SCRIPT
 1.) Open a new terminal and clone this repo (git clone https://github.com/nullkev/cs491_project)
 2.) cd $HOME/aerial_robotics_ws/src/
-3.) cp -r $HOME/cs491_project/project
+3.) cp -r $HOME/cs491_project/project $HOME/aerial_robotics_ws/src/
+5.) cd $HOME/aerial_robotics_ws
 4.) catkin build
 ```
 
