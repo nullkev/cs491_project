@@ -29,7 +29,6 @@ class AutoFlight:
         rospy.init_node("auto_flight")
         self.state = "INIT"
         self.april_counter = 0
-        self.takeoff_start_time = 0
         self.april_pose = None
         
         rospy.Subscriber("/minihawk_SIM/MH_usb_camera_link_optical/tag_detections", AprilTagDetectionArray, self.tag_cb)
@@ -134,7 +133,6 @@ class AutoFlight:
                 msg.channels[5] = 1000
                 msg.channels[6] = 1000
                 msg.channels[7] = 1800
-                #rospy.loginfo(msg.channels[0:4])
                 self.rc_pub.publish(msg)
                 #landing
                 if(self.april_pose and abs(pitch_err)<0.5 and abs(roll_err)<0.5 and abs(yaw_err)<0.2 and abs(z_err)<5) or self.april_counter == 0:
