@@ -131,5 +131,5 @@ wp load ../src/aerial_robotics/robowork_minihawk_gazebo/resources/waypoints.txt
 ROS_NAMESPACE="minihawk_SIM" roslaunch robowork_minihawk_launch vehicle1_apm_SIM.launch
 
 [Run Script (in new terminal 2)]:
-rosrun project auto_landing_node.py
+rosrun project src/auto_landing_node.py
 ```
